@@ -68,3 +68,14 @@ class Item:
 
     def __str__(self):
         return f'{self._name}'
+
+    def __add__(self, other):
+        if isinstance(other, self.__class__):
+            if isinstance(self.quantity, int) and isinstance(other.quantity, int):
+                if self.quantity > 0 and other.quantity > 0:
+                    return self.quantity + other.quantity
+                else:
+                    raise ValueError("Количество физических SIM-карт должно быть больше нуля")
+            else:
+                raise ValueError("Количество физических SIM-карт должно быть целым числом")
+        return None

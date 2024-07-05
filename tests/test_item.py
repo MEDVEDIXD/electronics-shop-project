@@ -2,6 +2,7 @@
 import pytest
 
 from src.item import Item
+from src.phone import Phone
 
 
 @pytest.fixture
@@ -51,3 +52,18 @@ def test__str__(items_fixture):
     item1, item2 = items_fixture
     assert str(item1) == 'Смартфон'
     assert str(item2) == 'Ноутбук'
+
+
+def test__add_(items_fixture):
+    item1, item2 = items_fixture
+
+    phone1 = Phone("iPhone 14", 120_000, 5, 2)
+    phone3 = Phone("iPhone 14", 120_000, 4, 0)
+
+    assert item1 + phone1 == 25
+    assert phone1 + phone1 == 10
+
+    assert isinstance(Phone, Item) == isinstance(Phone, Item)
+    assert isinstance(item1.quantity, int) == isinstance(phone1.quantity, int)
+    if phone3.number_of_sim <= 0:
+        assert ValueError("Количество физических SIM-карт должно быть целым числом больше нуля")
