@@ -1,7 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
-
-from src.item import Item
+import csv
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
 
 
@@ -67,3 +67,15 @@ def test__add_(items_fixture):
     assert isinstance(item1.quantity, int) == isinstance(phone1.quantity, int)
     if phone3.number_of_sim <= 0:
         assert ValueError("Количество физических SIM-карт должно быть целым числом больше нуля")
+
+
+def test_instantiate_from_csv_file_not_found():
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv('tems.csv')
+
+
+def test_instantiate_from_csv_instantiate_csv_error():
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv('../src/broken_items.csv')
+
+
